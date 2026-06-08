@@ -30,17 +30,17 @@ const preDefinedIntegrals = {
       },
       {
         title: 'Passo 4: Aplicar a Regra da Potência',
-        desc: 'A regra geral para integrar potências de x é \\int x^n \\, dx = \\frac{x^{n+1}}{n+1} (para n \\neq -1):',
+        desc: 'A regra geral para integrar potências de $x$ é $\\int x^n \\, dx = \\frac{x^{n+1}}{n+1}$ (para $n \\neq -1$):',
         math: 'Termo \\, 1: \\int x^2 \\, dx = \\frac{x^{2+1}}{2+1} = \\frac{x^3}{3}'
       },
       {
         title: 'Passo 5: Integrar o Segundo Termo',
-        desc: 'Aplicamos a mesma regra da potência para x (onde n = 1) e multiplicamos pelo fator 3 constante:',
+        desc: 'Aplicamos a mesma regra da potência para $x$ (onde $n = 1$) e multiplicamos pelo fator $3$ constante:',
         math: 'Termo \\, 2: 3 \\int x^1 \\, dx = 3 \\cdot \\frac{x^{1+1}}{1+1} = 3 \\cdot \\frac{x^2}{2} = \\frac{3x^2}{2}'
       },
       {
         title: 'Passo 6: Juntar os Resultados e Adicionar a Constante',
-        desc: 'Combinamos os termos resolvidos e adicionamos a constante de integração universal C, pois é uma integral indefinida:',
+        desc: 'Combinamos os termos resolvidos e adicionamos a constante de integração universal $C$, pois é uma integral indefinida:',
         math: '\\frac{x^3}{3} + \\frac{3x^2}{2} + C'
       }
     ],
@@ -96,27 +96,27 @@ const preDefinedIntegrals = {
     steps: [
       {
         title: 'Passo 1: Identificar a técnica de Substituição U',
-        desc: 'Note que temos a função sen(x) multiplicada por cos(x), que é exatamente a derivada de sen(x). Isso indica que podemos usar a substituição simples:',
+        desc: 'Note que temos a função $\\operatorname{sen}(x)$ multiplicada por $\\cos(x)$, que é exatamente a derivada de $\\operatorname{sen}(x)$. Isso indica que podemos usar a substituição simples:',
         math: 'Definimos \\, u = \\sin(x)'
       },
       {
         title: 'Passo 2: Calcular o diferencial du',
-        desc: 'Derivamos u em relação a x para achar o diferencial du:',
+        desc: 'Derivamos $u$ em relação a $x$ para achar o diferencial $du$:',
         math: 'du = \\frac{d}{dx}(\\sin(x)) \\, dx = \\cos(x) \\, dx'
       },
       {
         title: 'Passo 3: Substituir na integral',
-        desc: 'Substituímos sen(x) por u e cos(x) dx por du na expressão original:',
+        desc: 'Substituímos $\\operatorname{sen}(x)$ por $u$ e $\\cos(x) dx$ por $du$ na expressão original:',
         math: '\\int u \\, du'
       },
       {
         title: 'Passo 4: Integrar na nova variável u',
-        desc: 'Aplicamos a regra de potência simples para u (onde o expoente n = 1):',
+        desc: 'Aplicamos a regra de potência simples para $u$ (onde o expoente $n = 1$):',
         math: '\\int u^1 \\, du = \\frac{u^{1+1}}{1+1} = \\frac{u^2}{2}'
       },
       {
         title: 'Passo 5: Retornar à variável original x',
-        desc: 'Desfazemos a substituição trocando u por sen(x) novamente, e somamos a constante C:',
+        desc: 'Desfazemos a substituição trocando $u$ por $\\operatorname{sen}(x)$ novamente, e somamos a constante $C$:',
         math: '\\frac{\\sin^2(x)}{2} + C'
       }
     ],
@@ -177,12 +177,12 @@ const preDefinedIntegrals = {
       },
       {
         title: 'Passo 2: Identificar a constante a',
-        desc: 'Na nossa integral, a constante a² = 1, o que significa que a = 1:',
+        desc: 'Na nossa integral, a constante $a^2 = 1$, o que significa que $a = 1$:',
         math: 'a = 1'
       },
       {
         title: 'Passo 3: Substituir e Resolver',
-        desc: 'Substituindo a = 1 na fórmula geral, obtemos diretamente:',
+        desc: 'Substituindo $a = 1$ na fórmula geral, obtemos diretamente:',
         math: '\\int \\frac{1}{x^2 + 1} \\, dx = \\frac{1}{1} \\arctan\\left(\\frac{x}{1}\\right) + C = \\arctan(x) + C'
       }
     ],
@@ -225,17 +225,17 @@ const preDefinedIntegrals = {
       },
       {
         title: 'Passo 2: Aplicar a Regra da Potência',
-        desc: 'Usamos a regra de potência clássica \\int x^n \\, dx = \\frac{x^{n+1}}{n+1} para n = 1/2:',
+        desc: 'Usamos a regra de potência clássica $\\int x^n \\, dx = \\frac{x^{n+1}}{n+1}$ para $n = 1/2$:',
         math: '\\int x^{1/2} \\, dx = \\frac{x^{1/2 + 1}}{1/2 + 1} + C'
       },
       {
         title: 'Passo 3: Somar os Expoentes',
-        desc: 'Efetuamos a soma fracionária no expoente e no denominador: 1/2 + 1 = 3/2:',
+        desc: 'Efetuamos a soma fracionária no expoente e no denominador: $1/2 + 1 = 3/2$:',
         math: '\\frac{x^{3/2}}{3/2} + C'
       },
       {
         title: 'Passo 4: Simplificar a Fração do Denominador',
-        desc: 'Dividir por uma fração é o mesmo que multiplicar pelo seu inverso, transformando o 3/2 no denominador em 2/3 multiplicando na frente:',
+        desc: 'Dividir por uma fração é o mesmo que multiplicar pelo seu inverso, transformando o $3/2$ no denominador em $2/3$ multiplicando na frente:',
         math: '\\frac{2}{3}x^{3/2} + C'
       }
     ],
@@ -281,27 +281,27 @@ const preDefinedIntegrals = {
     steps: [
       {
         title: 'Passo 1: Aplicar Substituição de Variável',
-        desc: 'Para integrar uma exponencial com expoente composto, definimos a variável u como o expoente:',
+        desc: 'Para integrar uma exponencial com expoente composto, definimos a variável $u$ como o expoente:',
         math: 'u = 2x'
       },
       {
         title: 'Passo 2: Achar o Diferencial du',
-        desc: 'Derivamos u para encontrar dx:',
+        desc: 'Derivamos $u$ para encontrar $dx$:',
         math: 'du = 2 \\, dx \\implies dx = \\frac{du}{2}'
       },
       {
         title: 'Passo 3: Substituir na Integral',
-        desc: 'Troca-se o expoente 2x por u, e o dx por du/2, extraindo o fator constante 1/2:',
+        desc: 'Troca-se o expoente $2x$ por $u$, e o $dx$ por $du/2$, extraindo o fator constante $1/2$:',
         math: '\\int e^u \\frac{du}{2} = \\frac{1}{2} \\int e^u \\, du'
       },
       {
         title: 'Passo 4: Resolver a Integral da Exponencial',
-        desc: 'A integral de e^u em relação a u é a própria função e^u:',
+        desc: 'A integral de $e^u$ em relação a $u$ é a própria função $e^u$:',
         math: '\\frac{1}{2} \\cdot e^u = \\frac{e^u}{2}'
       },
       {
         title: 'Passo 5: Retornar para a Variável original x',
-        desc: 'Substituímos u por 2x novamente e somamos a constante C:',
+        desc: 'Substituímos $u$ por $2x$ novamente e somamos a constante $C$:',
         math: '\\frac{e^{2x}}{2} + C'
       }
     ],
@@ -355,7 +355,7 @@ const preDefinedIntegrals = {
       },
       {
         title: 'Passo 3: Achar os Diferenciais du e v',
-        desc: 'Derivamos u e integramos dv para obter du e v:',
+        desc: 'Derivamos $u$ e integramos $dv$ para obter $du$ e $v$:',
         math: 'du = \\frac{1}{x} \\, dx, \\quad v = x'
       },
       {
@@ -365,7 +365,7 @@ const preDefinedIntegrals = {
       },
       {
         title: 'Passo 5: Simplificar a Integral Restante',
-        desc: 'O termo x multiplicado por 1/x se anula, restando apenas a integral simples de 1:',
+        desc: 'O termo $x$ multiplicado por $1/x$ se anula, restando apenas a integral simples de $1$:',
         math: 'x \\ln(x) - \\int 1 \\, dx = x \\ln(x) - x + C'
       }
     ],
@@ -548,7 +548,7 @@ Regras importantes:
 - Para e^x use Math.exp(x), para ln(x) use Math.log(x)
 - defaultLimits deve ser um intervalo interessante para visualizar a integral
 - sliderLimits deve cobrir o domínio relevante da função
-- Toda e qualquer expressão matemática, variável ou trecho de fórmula no texto de 'question', 'options[text]', 'options[feedback]' e 'tip' DEVE estar entre símbolos de dólar $ (ex: "A integral de $\\int x dx$ é $x^2/2$").
+- Toda e qualquer expressão matemática, variável ou trecho de fórmula no texto de 'desc', 'question', 'options[text]', 'options[feedback]' e 'tip' DEVE estar entre símbolos de dólar $ (ex: "A integral de $\\int x dx$ é $x^2/2$").
 - Responda APENAS o JSON, sem nenhum texto antes ou depois`;
 
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;

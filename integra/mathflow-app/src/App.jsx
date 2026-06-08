@@ -27,13 +27,15 @@ import './App.css';
 import { solveIntegral, integrateNumerically, generateChartPoints, formatFriendlyResult } from './mathSolver';
 import 'katex/dist/katex.min.css';
 import katex from 'katex';
-import TutorChat from './TutorChat';
+import TutorChat, { renderMixedText } from './TutorChat';
 
 export default function App() {
   // Estados de Navegação e Modos
   const [activeTab, setActiveTab] = useState('resolver'); // 'resolver' ou 'historico'
   const [mode, setMode] = useState('resolver'); // 'resolver' ou 'tutor'
   const [inputText, setInputText] = useState('');
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
+
   
   // Estados de Cálculo e Resultados
   const [isLoading, setIsLoading] = useState(false);
@@ -113,6 +115,7 @@ export default function App() {
       }
 
       setSolvedData(result);
+      setActiveStepIndex(0);
 
       // Configurar limites iniciais
       const defaultLimits = result.defaultLimits || { a: 0, b: 2 };
@@ -299,24 +302,36 @@ export default function App() {
                     <span>Experimente um exemplo:</span>
                   </div>
                   <div className="examples-grid">
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de x² + 3x dx')}>
-                      integral de x² + 3x dx
-                    </button>
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de sen(x) cos(x) dx')}>
-                      integral de sen(x) cos(x) dx
-                    </button>
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de 1/(x²+1) dx')}>
-                      integral de 1/(x²+1) dx
-                    </button>
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de raiz de x dx')}>
-                      integral de raiz de x dx
-                    </button>
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de e^(2x) dx')}>
-                      integral de e^(2x) dx
-                    </button>
-                    <button className="example-pill" onClick={() => handleExampleClick('integral de ln(x) dx')}>
-                      integral de ln(x) dx
-                    </button>
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de x² + 3x dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int (x^2 + 3x) \\, dx', { throwOnError: false }) }}
+                    />
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de sen(x) cos(x) dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\operatorname{sen}(x) \\cos(x) \\, dx', { throwOnError: false }) }}
+                    />
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de 1/(x²+1) dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\frac{1}{x^2+1} \\, dx', { throwOnError: false }) }}
+                    />
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de raiz de x dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\sqrt{x} \\, dx', { throwOnError: false }) }}
+                    />
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de e^(2x) dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int e^{2x} \\, dx', { throwOnError: false }) }}
+                    />
+                    <button 
+                      className="example-pill" 
+                      onClick={() => handleExampleClick('integral de ln(x) dx')}
+                      dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\ln(x) \\, dx', { throwOnError: false }) }}
+                    />
                   </div>
                 </div>
               </>
@@ -487,32 +502,109 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* 3. Card do Passo a Passo Didático */}
+                {/* 3. Card do Passo a Passo Didático (Visualizador Interativo) */}
                 {mode === 'resolver' && (
                   <div className="result-card">
                     <div className="card-title-bar">
-                    <div className="card-title-text">
-                      <Sparkles size={18} className="card-title-icon" />
-                      Explicações Passo a Passo
+                      <div className="card-title-text">
+                        <Sparkles size={18} className="card-title-icon" />
+                        Explicações Passo a Passo
+                      </div>
                     </div>
-                  </div>
-                  <div className="steps-timeline">
-                    {solvedData.steps.map((step, idx) => (
-                      <div key={idx} className="timeline-item">
-                        <div className="timeline-dot"></div>
-                        <div className="timeline-content">
-                          <div className="step-header">{step.title}</div>
-                          <p className="step-desc">{step.desc}</p>
-                          <div 
-                            className="step-math" 
-                            style={{ overflowX: 'auto' }}
-                            dangerouslySetInnerHTML={{ __html: katex.renderToString(step.math, { displayMode: true, throwOnError: false }) }}
-                          />
+                    
+                    <div className="steps-visualizer-grid">
+                      {/* Coluna Esquerda: Linha do Tempo */}
+                      <div className="visualizer-sidebar">
+                        <div className="steps-timeline">
+                          {solvedData.steps.map((step, idx) => {
+                            const isActive = idx === activeStepIndex;
+                            const isPast = idx < activeStepIndex;
+                            let timelineClass = 'timeline-item';
+                            if (isActive) timelineClass += ' active';
+                            if (!isActive && !isPast) timelineClass += ' inactive';
+                            if (isPast) timelineClass += ' completed';
+                            
+                            return (
+                              <div 
+                                key={idx} 
+                                className={timelineClass}
+                                onClick={() => setActiveStepIndex(idx)}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                <div className="timeline-dot"></div>
+                                <div className="timeline-content">
+                                  <div className="step-header">{step.title}</div>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
-                    ))}
+                      
+                      {/* Coluna Direita: Foco Visual e Controles */}
+                      <div className="visualizer-main">
+                        <div className="visualizer-focus-board">
+                          {solvedData.steps[activeStepIndex] && (
+                            <>
+                              <h3 className="focus-title">{solvedData.steps[activeStepIndex].title}</h3>
+                              <p className="focus-desc">{renderMixedText(solvedData.steps[activeStepIndex].desc)}</p>
+                              <div 
+                                className="focus-math"
+                                dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.steps[activeStepIndex].math, { displayMode: true, throwOnError: false }) }}
+                              />
+                            </>
+                          )}
+                        </div>
+                        
+                        {/* Controles de Reprodução */}
+                        <div className="playback-controls">
+                          <button 
+                            className="playback-btn" 
+                            disabled={activeStepIndex === 0}
+                            onClick={() => setActiveStepIndex(0)}
+                            title="Primeiro Passo"
+                          >
+                            |&lt;
+                          </button>
+                          <button 
+                            className="playback-btn" 
+                            disabled={activeStepIndex === 0}
+                            onClick={() => setActiveStepIndex(Math.max(0, activeStepIndex - 1))}
+                            title="Passo Anterior"
+                          >
+                            &lt;
+                          </button>
+                          <input 
+                            type="range" 
+                            className="playback-slider"
+                            min={0} 
+                            max={solvedData.steps.length - 1} 
+                            value={activeStepIndex}
+                            onChange={(e) => setActiveStepIndex(parseInt(e.target.value))}
+                          />
+                          <button 
+                            className="playback-btn" 
+                            disabled={activeStepIndex === solvedData.steps.length - 1}
+                            onClick={() => setActiveStepIndex(Math.min(solvedData.steps.length - 1, activeStepIndex + 1))}
+                            title="Próximo Passo"
+                          >
+                            &gt;
+                          </button>
+                          <button 
+                            className="playback-btn" 
+                            disabled={activeStepIndex === solvedData.steps.length - 1}
+                            onClick={() => setActiveStepIndex(solvedData.steps.length - 1)}
+                            title="Último Passo"
+                          >
+                            &gt;|
+                          </button>
+                        </div>
+                        <div className="playback-status">
+                          Passo {activeStepIndex + 1} de {solvedData.steps.length}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
                 )}
 
                 {/* Exibição do Tutor IA (Modo Chat) */}

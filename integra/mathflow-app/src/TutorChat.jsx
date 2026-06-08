@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import katex from 'katex';
 
-function renderMixedText(text) {
+export function renderMixedText(text) {
   if (!text) return null;
   const parts = text.split(/\$(.*?)\$/g);
   return parts.map((part, index) => {
