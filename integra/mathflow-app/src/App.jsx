@@ -24,7 +24,9 @@ import {
 } from 'recharts';
 
 import './App.css';
-import { solveIntegral, integrateNumerically, generateChartPoints, formatResultDisplay, formatFriendlyResult } from './mathSolver';
+import { solveIntegral, integrateNumerically, generateChartPoints, formatFriendlyResult } from './mathSolver';
+import 'katex/dist/katex.min.css';
+import katex from 'katex';
 import TutorChat from './TutorChat';
 
 export default function App() {
@@ -350,12 +352,13 @@ export default function App() {
               </div>
             )}
 
-            {/* Exibição dos Resultados (Modo Resolver) */}
-            {solvedData && !isLoading && mode === 'resolver' && (
+            {/* Exibição dos Resultados */}
+            {solvedData && !isLoading && (
               <div className="results-container">
                 {/* 1. Card da Resolução Analítica */}
-                <div className="result-card">
-                  <div className="card-title-bar">
+                {mode === 'resolver' && (
+                  <div className="result-card">
+                    <div className="card-title-bar">
                     <div className="card-title-text">
                       <FileText size={18} className="card-title-icon" />
                       Resultado Analítico
@@ -369,28 +372,25 @@ export default function App() {
                   </div>
                   <div className="math-result-display">
                     <div className="math-formula">
-                      {(() => {
-                        const formatted = formatResultDisplay(solvedData.latexFormula, solvedData.latexResult);
-                        return (
-                          <>
-                            <div style={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500' }}>
-                              {formatted.integral}
-                            </div>
-                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                              Resultado:
-                            </div>
-                            <span className="formula-highlight" style={{ fontSize: '16px', fontWeight: '600' }}>
-                              {formatted.result}
-                            </span>
-                          </>
-                        );
-                      })()}
+                      <div 
+                        style={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500', width: '100%', overflowX: 'auto', textAlign: 'center' }}
+                        dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexFormula, { displayMode: true, throwOnError: false }) }}
+                      />
+                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px', textAlign: 'center' }}>
+                        Resultado:
+                      </div>
+                      <div 
+                        className="formula-highlight" 
+                        style={{ fontSize: '16px', fontWeight: '600', width: '100%', overflowX: 'auto', textAlign: 'center' }}
+                        dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexResult, { displayMode: true, throwOnError: false }) }}
+                      />
                     </div>
                   </div>
                   <p style={{ fontSize: '14px', color: 'var(--text-secondary)', textAlign: 'center' }}>
                     Esta é a antiderivada geral da função. O termo <strong>C</strong> representa a constante arbitrária de integração.
                   </p>
                 </div>
+                )}
 
                 {/* 2. Gráfico Interativo com Sliders */}
                 <div className="result-card">
@@ -488,8 +488,9 @@ export default function App() {
                 </div>
 
                 {/* 3. Card do Passo a Passo Didático */}
-                <div className="result-card">
-                  <div className="card-title-bar">
+                {mode === 'resolver' && (
+                  <div className="result-card">
+                    <div className="card-title-bar">
                     <div className="card-title-text">
                       <Sparkles size={18} className="card-title-icon" />
                       Explicações Passo a Passo
@@ -502,22 +503,27 @@ export default function App() {
                         <div className="timeline-content">
                           <div className="step-header">{step.title}</div>
                           <p className="step-desc">{step.desc}</p>
-                          <div className="step-math">{formatFriendlyResult(step.math)}</div>
+                          <div 
+                            className="step-math" 
+                            style={{ overflowX: 'auto' }}
+                            dangerouslySetInnerHTML={{ __html: katex.renderToString(step.math, { displayMode: true, throwOnError: false }) }}
+                          />
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
-            )}
+                )}
 
-            {/* Exibição do Tutor IA (Modo Chat) */}
-            {solvedData && !isLoading && mode === 'tutor' && (
-              <div style={{ width: '100%' }}>
-                <TutorChat 
-                  problemData={solvedData}
-                  onReset={() => { setSolvedData(null); setInputText(''); }}
-                />
+                {/* Exibição do Tutor IA (Modo Chat) */}
+                {mode === 'tutor' && (
+                  <div style={{ width: '100%' }}>
+                    <TutorChat 
+                      problemData={solvedData}
+                      onReset={() => { setSolvedData(null); setInputText(''); }}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </>

@@ -49,35 +49,35 @@ const preDefinedIntegrals = {
         question: 'Olá! Vamos resolver passo a passo a integral indefinida de x² + 3x. Para começar, temos uma soma de dois termos. Qual regra você acha que devemos aplicar primeiro para simplificar o problema?',
         options: [
           { text: 'Regra da Cadeia (Substituição U)', isCorrect: false, feedback: 'Não, a substituição U é usada quando temos uma função composta multiplicada por sua derivada. Aqui é uma soma direta de polinômios.' },
-          { text: 'Regra da Soma (Integrar termo a termo)', isCorrect: true, feedback: 'Excelente! A regra da soma nos permite dividir a integral em várias partes mais fáceis: \\int(f(x) + g(x))dx = \\int f(x)dx + \\int g(x)dx.' },
+          { text: 'Regra da Soma (Integrar termo a termo)', isCorrect: true, feedback: 'Excelente! A regra da soma nos permite dividir a integral em várias partes mais fáceis: $\\int(f(x) + g(x))dx = \\int f(x)dx + \\int g(x)dx$.' },
           { text: 'Integração por Partes', isCorrect: false, feedback: 'Não é necessário usar partes aqui, pois não temos um produto de funções de naturezas diferentes.' }
         ],
         tip: 'Tente olhar para o sinal de "+" no meio da expressão.'
       },
       {
-        question: 'Perfeito! Separamos em \\int x² dx + \\int 3x dx. Agora, vamos focar no primeiro termo: \\int x² dx. Qual é a integral de x² usando a Regra da Potência?',
+        question: 'Perfeito! Separamos em $\\int x^2 dx + \\int 3x dx$. Agora, vamos focar no primeiro termo: $\\int x^2 dx$. Qual é a integral de $x^2$ usando a Regra da Potência?',
         options: [
-          { text: '2x', isCorrect: false, feedback: 'Cuidado! 2x é a derivada de x², não a integral. Na integral, nós aumentamos o expoente em 1.' },
-          { text: 'x³ / 3', isCorrect: true, feedback: 'Correto! Pela regra da potência, adicionamos 1 ao expoente (2+1 = 3) e dividimos pelo novo expoente: x³ / 3.' },
-          { text: 'x³', isCorrect: false, feedback: 'Quase! Você aumentou o expoente para 3, mas esqueceu de dividir pelo novo expoente.' }
+          { text: '$2x$', isCorrect: false, feedback: 'Cuidado! $2x$ é a derivada de $x^2$, não a integral. Na integral, nós aumentamos o expoente em 1.' },
+          { text: '$x^3 / 3$', isCorrect: true, feedback: 'Correto! Pela regra da potência, adicionamos 1 ao expoente (2+1 = 3) e dividimos pelo novo expoente: $x^3 / 3$.' },
+          { text: '$x^3$', isCorrect: false, feedback: 'Quase! Você aumentou o expoente para 3, mas esqueceu de dividir pelo novo expoente.' }
         ],
-        tip: 'Lembre-se da fórmula: \\int x^n dx = x^(n+1) / (n+1).'
+        tip: 'Lembre-se da fórmula: $\\int x^n dx = \\frac{x^{n+1}}{n+1}$.'
       },
       {
-        question: 'Excelente progresso! O primeiro termo é x³/3. Agora para o segundo termo: \\int 3x dx. Primeiro, o que podemos fazer com o coeficiente constante 3?',
+        question: 'Excelente progresso! O primeiro termo é $x^3/3$. Agora para o segundo termo: $\\int 3x dx$. Primeiro, o que podemos fazer com o coeficiente constante 3?',
         options: [
           { text: 'Ignorá-lo ou descartá-lo', isCorrect: false, feedback: 'Não podemos simplesmente remover a constante, ela faz parte da função multiplicativa.' },
-          { text: 'Tirá-lo para fora da integral', isCorrect: true, feedback: 'Certíssimo! Qualquer constante multiplicativa pode ser colocada para fora da integral: \\int c \\cdot f(x) dx = c \\int f(x) dx.' },
+          { text: 'Tirá-lo para fora da integral', isCorrect: true, feedback: 'Certíssimo! Qualquer constante multiplicativa pode ser colocada para fora da integral: $\\int c \\cdot f(x) dx = c \\int f(x) dx$.' },
           { text: 'Elevá-lo ao quadrado', isCorrect: false, feedback: 'Não, não há nenhuma regra que nos diga para elevar coeficientes ao quadrado.' }
         ],
         tip: 'Tente lembrar da propriedade de linearidade da integral.'
       },
       {
-        question: 'Sensacional! Agora calculamos 3 \\int x dx. Sabendo que a integral de x é x²/2, qual é o resultado final somando tudo e adicionando a constante universal?',
+        question: 'Sensacional! Agora calculamos $3 \\int x dx$. Sabendo que a integral de $x$ é $x^2/2$, qual é o resultado final somando tudo e adicionando a constante universal?',
         options: [
-          { text: 'x³/3 + 3x²/2', isCorrect: false, feedback: 'Falta apenas um pequeno detalhe fundamental de toda integral indefinida!' },
-          { text: 'x³/3 + 3x²/2 + C', isCorrect: true, feedback: 'Perfeito! Parabéns! Conseguimos resolver a integral passo a passo com sucesso! A constante C representa qualquer constante real deslocada verticalmente.' },
-          { text: 'x²/2 + 3x + C', isCorrect: false, feedback: 'Não, você misturou os termos calculados anteriormente.' }
+          { text: '$x^3/3 + 3x^2/2$', isCorrect: false, feedback: 'Falta apenas um pequeno detalhe fundamental de toda integral indefinida!' },
+          { text: '$x^3/3 + 3x^2/2 + C$', isCorrect: true, feedback: 'Perfeito! Parabéns! Conseguimos resolver a integral passo a passo com sucesso! A constante C representa qualquer constante real deslocada verticalmente.' },
+          { text: '$x^2/2 + 3x + C$', isCorrect: false, feedback: 'Não, você misturou os termos calculados anteriormente.' }
         ],
         tip: 'Toda integral indefinida precisa terminar com a famosa constante...'
       }
@@ -122,38 +122,38 @@ const preDefinedIntegrals = {
     ],
     tutorSteps: [
       {
-        question: 'Vamos lá! Vamos resolver a integral de sen(x) cos(x) dx. Ela parece intimidadora, mas note que uma parte é a derivada da outra. Que método clássico de integração se encaixa aqui?',
+        question: 'Vamos lá! Vamos resolver a integral de $\\sin(x) \\cos(x) dx$. Ela parece intimidadora, mas note que uma parte é a derivada da outra. Que método clássico de integração se encaixa aqui?',
         options: [
           { text: 'Integração por Partes', isCorrect: false, feedback: 'Poderíamos usar partes, mas existe um método de substituição simples muito mais rápido para este formato!' },
-          { text: 'Método da Substituição de Variável (Substituição U)', isCorrect: true, feedback: 'Exatamente! Como a derivada do seno é o cosseno, podemos usar u = sen(x) e simplificar drasticamente a integral.' },
+          { text: 'Método da Substituição de Variável (Substituição U)', isCorrect: true, feedback: 'Exatamente! Como a derivada do seno é o cosseno, podemos usar $u = \\sin(x)$ e simplificar drasticamente a integral.' },
           { text: 'Frações Parciais', isCorrect: false, feedback: 'Não, frações parciais são reservadas para integrar funções racionais (divisões de polinômios).' }
         ],
         tip: 'Pense em qual método troca uma parte da função por uma nova letra "u".'
       },
       {
-        question: 'Excelente! Escolhemos u = sen(x). Qual é o diferencial du correspondente a essa escolha?',
+        question: 'Excelente! Escolhemos $u = \\sin(x)$. Qual é o diferencial $du$ correspondente a essa escolha?',
         options: [
-          { text: 'du = -cos(x) dx', isCorrect: false, feedback: 'Quase! A derivada de sen(x) é cos(x) positiva. A derivada de cos(x) que é -sen(x).' },
-          { text: 'du = cos(x) dx', isCorrect: true, feedback: 'Corretíssimo! d/dx(sen(x)) = cos(x), portanto du = cos(x) dx.' },
-          { text: 'du = sen(x) dx', isCorrect: false, feedback: 'Não, a derivada do seno não é o próprio seno.' }
+          { text: '$du = -\\cos(x) dx$', isCorrect: false, feedback: 'Quase! A derivada de $\\sin(x)$ é $\\cos(x)$ positiva. A derivada de $\\cos(x)$ que é $-\\sin(x)$.' },
+          { text: '$du = \\cos(x) dx$', isCorrect: true, feedback: 'Corretíssimo! $d/dx(\\sin(x)) = \\cos(x)$, portanto $du = \\cos(x) dx$.' },
+          { text: '$du = \\sin(x) dx$', isCorrect: false, feedback: 'Não, a derivada do seno não é o próprio seno.' }
         ],
-        tip: 'Qual é a derivada básica de sen(x) com relação a x?'
+        tip: 'Qual é a derivada básica de $\\sin(x)$ com relação a $x$?'
       },
       {
-        question: 'Ótimo! Agora substituindo tudo, nossa integral \\int sen(x) cos(x) dx vira simplesmente \\int u du. Qual é a integral de u em relação a u?',
+        question: 'Ótimo! Agora substituindo tudo, nossa integral $\\int \\sin(x) \\cos(x) dx$ vira simplesmente $\\int u du$. Qual é a integral de $u$ em relação a $u$?',
         options: [
-          { text: 'u² / 2', isCorrect: true, feedback: 'Perfeito! Pela regra da potência, a integral de u^1 é u²/2.' },
-          { text: 'u', isCorrect: false, feedback: 'Não, a integral de 1 seria u. Para u^1, o grau do termo aumenta para 2.' },
-          { text: '1', isCorrect: false, feedback: 'Não, 1 seria a derivada de u.' }
+          { text: '$u^2 / 2$', isCorrect: true, feedback: 'Perfeito! Pela regra da potência, a integral de $u^1$ é $u^2/2$.' },
+          { text: '$u$', isCorrect: false, feedback: 'Não, a integral de 1 seria $u$. Para $u^1$, o grau do termo aumenta para 2.' },
+          { text: '$1$', isCorrect: false, feedback: 'Não, $1$ seria a derivada de $u$.' }
         ],
-        tip: 'Aplique a regra da potência para u^1.'
+        tip: 'Aplique a regra da potência para $u^1$.'
       },
       {
-        question: 'Maravilha! Agora, para finalizar, basta substituir de volta u = sen(x) na nossa resposta u²/2. Qual é a expressão final?',
+        question: 'Maravilha! Agora, para finalizar, basta substituir de volta $u = \\sin(x)$ na nossa resposta $u^2/2$. Qual é a expressão final?',
         options: [
-          { text: 'sen²(x) / 2', isCorrect: false, feedback: 'Está correto, mas não esqueça da constante de integração universal no final!' },
-          { text: 'sen²(x) / 2 + C', isCorrect: true, feedback: 'Espetacular! Você resolveu a integral por substituição u com maestria! O resultado final é sen²(x)/2 + C.' },
-          { text: 'cos²(x) / 2 + C', isCorrect: false, feedback: 'Não, nós substituímos u por sen(x), não por cos(x).' }
+          { text: '$\\frac{\\sin^2(x)}{2}$', isCorrect: false, feedback: 'Está correto, mas não esqueça da constante de integração universal no final!' },
+          { text: '$\\frac{\\sin^2(x)}{2} + C$', isCorrect: true, feedback: 'Espetacular! Você resolveu a integral por substituição u com maestria! O resultado final é $\\frac{\\sin^2(x)}{2} + C$.' },
+          { text: '$\\frac{\\cos^2(x)}{2} + C$', isCorrect: false, feedback: 'Não, nós substituímos $u$ por $\\sin(x)$, não por $\\cos(x)$.' }
         ],
         tip: 'Substitua u por sen(x) e adicione o "+ C".'
       }
@@ -188,20 +188,20 @@ const preDefinedIntegrals = {
     ],
     tutorSteps: [
       {
-        question: 'Essa integral é um clássico! \\int 1/(x²+1) dx. Algumas integrais são chamadas de imediatas porque são o resultado direto de derivadas conhecidas. Você lembra qual função quando derivada resulta em 1/(x²+1)?',
+        question: 'Essa integral é um clássico! $\\int \\frac{1}{x^2+1} dx$. Algumas integrais são chamadas de imediatas porque são o resultado direto de derivadas conhecidas. Você lembra qual função quando derivada resulta em $\\frac{1}{x^2+1}$?',
         options: [
-          { text: 'ln(x² + 1)', isCorrect: false, feedback: 'Não, a derivada de ln(x²+1) seria 2x/(x²+1), devido à regra da cadeia.' },
-          { text: 'arctan(x) (ou arco-tangente)', isCorrect: true, feedback: 'Perfeito! A derivada de arctan(x) é exatamente 1/(x²+1). Portanto, a integral é imediata.' },
-          { text: 'tan(x)', isCorrect: false, feedback: 'Não, a derivada de tan(x) é sec²(x).' }
+          { text: '$\\ln(x^2 + 1)$', isCorrect: false, feedback: 'Não, a derivada de $\\ln(x^2+1)$ seria $\\frac{2x}{x^2+1}$, devido à regra da cadeia.' },
+          { text: '$\\arctan(x)$ (ou arco-tangente)', isCorrect: true, feedback: 'Perfeito! A derivada de $\\arctan(x)$ é exatamente $\\frac{1}{x^2+1}$. Portanto, a integral é imediata.' },
+          { text: '$\\tan(x)$', isCorrect: false, feedback: 'Não, a derivada de $\\tan(x)$ é $\\sec^2(x)$.' }
         ],
         tip: 'Pense em funções trigonométricas inversas.'
       },
       {
-        question: 'Exatamente! A integral de 1/(x²+1) dx é imediata e resulta em arctan(x) + C. Qual é o valor numérico dessa integral se integrarmos de 0 a 1 (ou seja, F(1) - F(0))?',
+        question: 'Exatamente! A integral de $\\frac{1}{x^2+1} dx$ é imediata e resulta em $\\arctan(x) + C$. Qual é o valor numérico dessa integral se integrarmos de 0 a 1 (ou seja, $F(1) - F(0)$)?',
         options: [
-          { text: 'π / 4', isCorrect: true, feedback: 'Brilhante! arctan(1) = π/4 (pois tan(π/4) = 1) e arctan(0) = 0. Então, a integral definida vale π/4.' },
-          { text: 'π', isCorrect: false, feedback: 'Não, tan(π) = 0. A tangente que vale 1 é a de 45 graus (π/4 radianos).' },
-          { text: '1', isCorrect: false, feedback: 'Não, arctan(1) é medido em radianos.' }
+          { text: '$\\frac{\\pi}{4}$', isCorrect: true, feedback: 'Brilhante! $\\arctan(1) = \\frac{\\pi}{4}$ (pois $\\tan(\\frac{\\pi}{4}) = 1$) e $\\arctan(0) = 0$. Então, a integral definida vale $\\frac{\\pi}{4}$.' },
+          { text: '$\\pi$', isCorrect: false, feedback: 'Não, $\\tan(\\pi) = 0$. A tangente que vale 1 é a de 45 graus ($\\frac{\\pi}{4}$ radianos).' },
+          { text: '$1$', isCorrect: false, feedback: 'Não, $\\arctan(1)$ é medido em radianos.' }
         ],
         tip: 'Lembre-se em qual ângulo em radianos a tangente é igual a 1.'
       }
@@ -241,27 +241,27 @@ const preDefinedIntegrals = {
     ],
     tutorSteps: [
       {
-        question: 'Olá! Vamos resolver a integral de \\sqrt{x} dx. Para começar, as regras de cálculo funcionam muito melhor com potências numéricas. Como podemos reescrever \\sqrt{x} como uma potência?',
+        question: 'Olá! Vamos resolver a integral de $\\sqrt{x} dx$. Para começar, as regras de cálculo funcionam muito melhor com potências numéricas. Como podemos reescrever $\\sqrt{x}$ como uma potência?',
         options: [
-          { text: 'x^-1', isCorrect: false, feedback: 'Não, x^-1 é igual a 1/x.' },
-          { text: 'x^(1/2)', isCorrect: true, feedback: 'Perfeito! Qualquer raiz n-ésima pode ser escrita como um expoente fracionário: \\sqrt[n]{x} = x^(1/n). Logo, raiz quadrada é x^(1/2).' },
-          { text: 'x²', isCorrect: false, feedback: 'Não, x² é o quadrado de x, o oposto de extrair a raiz quadrada.' }
+          { text: '$x^{-1}$', isCorrect: false, feedback: 'Não, $x^{-1}$ é igual a $1/x$.' },
+          { text: '$x^{1/2}$', isCorrect: true, feedback: 'Perfeito! Qualquer raiz n-ésima pode ser escrita como um expoente fracionário: $\\sqrt[n]{x} = x^{1/n}$. Logo, raiz quadrada é $x^{1/2}$.' },
+          { text: '$x^2$', isCorrect: false, feedback: 'Não, $x^2$ é o quadrado de x, o oposto de extrair a raiz quadrada.' }
         ],
         tip: 'Pense em potências fracionárias, onde o índice da raiz (2) fica no denominador.'
       },
       {
-        question: 'Muito bem! Temos a integral de x^(1/2) dx. Agora aplicamos a Regra da Potência: adicionamos 1 ao expoente e dividimos por essa soma. Quanto é 1/2 + 1?',
+        question: 'Muito bem! Temos a integral de $x^{1/2} dx$. Agora aplicamos a Regra da Potência: adicionamos 1 ao expoente e dividimos por essa soma. Quanto é $1/2 + 1$?',
         options: [
-          { text: '3/2', isCorrect: true, feedback: 'Correto! 1/2 + 2/2 = 3/2.' },
-          { text: '2/3', isCorrect: false, feedback: 'Não, você inverteu a fração.' },
-          { text: '1.2', isCorrect: false, feedback: 'Embora seja 1.5, em frações de cálculo é melhor trabalhar com 3/2 para as simplificações.' }
+          { text: '$3/2$', isCorrect: true, feedback: 'Correto! $1/2 + 2/2 = 3/2$.' },
+          { text: '$2/3$', isCorrect: false, feedback: 'Não, você inverteu a fração.' },
+          { text: '$1.5$', isCorrect: false, feedback: 'Embora seja 1.5, em frações de cálculo é melhor trabalhar com $3/2$ para as simplificações.' }
         ],
         tip: 'Some metade com uma unidade inteira (dois meios).'
       },
       {
-        question: 'Isso aí! Nossa expressão fica x^(3/2) dividido por 3/2. Como podemos simplificar uma divisão por fração?',
+        question: 'Isso aí! Nossa expressão fica $x^{3/2}$ dividido por $3/2$. Como podemos simplificar uma divisão por fração?',
         options: [
-          { text: 'Inverter a fração e multiplicar: 2/3 * x^(3/2) + C', isCorrect: true, feedback: 'Excelente! Divisão por 3/2 é igual a multiplicar por 2/3. E adicionando a constante C, temos a solução perfeita!' },
+          { text: 'Inverter a fração e multiplicar: $\\frac{2}{3} x^{3/2} + C$', isCorrect: true, feedback: 'Excelente! Divisão por $3/2$ é igual a multiplicar por $2/3$. E adicionando a constante C, temos a solução perfeita!' },
           { text: 'Subtrair os termos', isCorrect: false, feedback: 'Não há regras de subtração em divisões de fração.' }
         ],
         tip: 'Inverta a fração do denominador e traga-a multiplicando para a frente.'
@@ -307,28 +307,28 @@ const preDefinedIntegrals = {
     ],
     tutorSteps: [
       {
-        question: 'Integral exponencial! \\int e^(2x) dx. Se fosse apenas \\int e^x dx, a resposta seria e^x + C. Mas aqui temos "2x" no expoente. Qual técnica nos ajuda a contornar isso?',
+        question: 'Integral exponencial! $\\int e^{2x} dx$. Se fosse apenas $\\int e^x dx$, a resposta seria $e^x + C$. Mas aqui temos "$2x$" no expoente. Qual técnica nos ajuda a contornar isso?',
         options: [
-          { text: 'Substituição simples (Substituição U)', isCorrect: true, feedback: 'Perfeito! Definindo u = 2x, conseguimos simplificar a integral exponencial facilmente.' },
+          { text: 'Substituição simples (Substituição U)', isCorrect: true, feedback: 'Perfeito! Definindo $u = 2x$, conseguimos simplificar a integral exponencial facilmente.' },
           { text: 'Trigonometria inversa', isCorrect: false, feedback: 'Não há termos trigonométricos ou inversos nesta expressão.' }
         ],
         tip: 'Precisamos de algo para trocar o expoente complexo por uma única variável "u".'
       },
       {
-        question: 'Ótimo, u = 2x. Então du = 2 dx. Isso significa que dx = du / 2. Substituindo na integral, ficamos com \\int (e^u) * (du/2), ou seja, 1/2 \\int e^u du. Qual a integral de e^u?',
+        question: 'Ótimo, $u = 2x$. Então $du = 2 dx$. Isso significa que $dx = du / 2$. Substituindo na integral, ficamos com $\\int e^u \\frac{du}{2}$, ou seja, $\\frac{1}{2} \\int e^u du$. Qual a integral de $e^u$?',
         options: [
-          { text: 'e^u', isCorrect: true, feedback: 'Correto! A função exponencial natural e^x é a única cuja derivada e integral são ela mesma.' },
-          { text: 'e^(u+1) / (u+1)', isCorrect: false, feedback: 'Cuidado! A regra da potência só serve para potências de base x (como x^n), não para quando x está no expoente (e^x).' }
+          { text: '$e^u$', isCorrect: true, feedback: 'Correto! A função exponencial natural $e^x$ é a única cuja derivada e integral são ela mesma.' },
+          { text: '$\\frac{e^{u+1}}{u+1}$', isCorrect: false, feedback: 'Cuidado! A regra da potência só serve para potências de base x (como $x^n$), não para quando x está no expoente ($e^x$).' }
         ],
         tip: 'Pense na função mais fiel do cálculo, que não muda ao ser derivada ou integrada.'
       },
       {
-        question: 'Excelente! Temos 1/2 * e^u. Agora, desfazendo a substituição u = 2x e somando a constante, qual é a nossa solução final?',
+        question: 'Excelente! Temos $\\frac{1}{2} e^u$. Agora, desfazendo a substituição $u = 2x$ e somando a constante, qual é a nossa solução final?',
         options: [
-          { text: 'e^(2x)/2 + C', isCorrect: true, feedback: 'Fantástico! Você completou a integração com sucesso. O resultado é e^(2x)/2 + C.' },
-          { text: '2e^(2x) + C', isCorrect: false, feedback: 'Cuidado! A constante 1/2 divide a exponencial, ela não multiplica por 2.' }
+          { text: '$\\frac{e^{2x}}{2} + C$', isCorrect: true, feedback: 'Fantástico! Você completou a integração com sucesso. O resultado é $\\frac{e^{2x}}{2} + C$.' },
+          { text: '$2e^{2x} + C$', isCorrect: false, feedback: 'Cuidado! A constante $\\frac{1}{2}$ divide a exponencial, ela não multiplica por 2.' }
         ],
-        tip: 'Substitua u por 2x na expressão (e^u)/2.'
+        tip: 'Substitua u por $2x$ na expressão $\\frac{e^u}{2}$.'
       }
     ]
   },
@@ -371,28 +371,28 @@ const preDefinedIntegrals = {
     ],
     tutorSteps: [
       {
-        question: 'Integral de ln(x) dx! Esta é muito interessante. O logaritmo natural não tem uma integral imediata, mas podemos resolver encarando como um produto: ln(x) * 1. Qual método clássico usa produto de duas partes?',
+        question: 'Integral de $\\ln(x) dx$! Esta é muito interessante. O logaritmo natural não tem uma integral imediata, mas podemos resolver encarando como um produto: $\\ln(x) \\cdot 1$. Qual método clássico usa produto de duas partes?',
         options: [
-          { text: 'Substituição simples', isCorrect: false, feedback: 'Substituição u não ajuda aqui porque não temos a derivada 1/x presente no termo multiplicando.' },
-          { text: 'Integração por Partes', isCorrect: true, feedback: 'Perfeito! Usamos partes baseando-se na fórmula \\int u dv = uv - \\int v du, escolhendo u = ln(x) e dv = dx.' }
+          { text: 'Substituição simples', isCorrect: false, feedback: 'Substituição u não ajuda aqui porque não temos a derivada $1/x$ presente no termo multiplicando.' },
+          { text: 'Integração por Partes', isCorrect: true, feedback: 'Perfeito! Usamos partes baseando-se na fórmula $\\int u dv = uv - \\int v du$, escolhendo $u = \\ln(x)$ e $dv = dx$.' }
         ],
         tip: 'Pense no método cuja fórmula é "um dia vi um velho vestir uniforme".'
       },
       {
-        question: 'Muito bem! Escolhemos u = ln(x) e dv = dx. Derivando u, temos du = (1/x) dx. Integrando dv = dx, temos v = x. Jogando tudo na fórmula: uv - \\int v du, o que resta na parte da integral \\int v du?',
+        question: 'Muito bem! Escolhemos $u = \\ln(x)$ e $dv = dx$. Derivando u, temos $du = \\frac{1}{x} dx$. Integrando $dv = dx$, temos $v = x$. Jogando tudo na fórmula: $uv - \\int v du$, o que resta na parte da integral $\\int v du$?',
         options: [
-          { text: '\\int x * (1/x) dx, ou seja, \\int 1 dx', isCorrect: true, feedback: 'Excelente! Os termos x e 1/x se simplificam para 1, restando apenas a integral simples de 1 dx.' },
-          { text: '\\int x² dx', isCorrect: false, feedback: 'Não, o x multiplica por 1/x, o que resulta em 1, não em x².' }
+          { text: '$\\int x \\cdot \\frac{1}{x} dx$, ou seja, $\\int 1 dx$', isCorrect: true, feedback: 'Excelente! Os termos $x$ e $1/x$ se simplificam para $1$, restando apenas a integral simples de $1 dx$.' },
+          { text: '$\\int x^2 dx$', isCorrect: false, feedback: 'Não, o $x$ multiplica por $1/x$, o que resulta em $1$, não em $x^2$.' }
         ],
-        tip: 'Multiplique v (que é x) por du (que é 1/x dx) e veja o que cancela.'
+        tip: 'Multiplique $v$ (que é $x$) por $du$ (que é $1/x dx$) e veja o que cancela.'
       },
       {
-        question: 'Isso mesmo! A integral restante é de 1 dx, que simplesmente vale x. Juntando as duas partes: uv - a integral resolvida, qual é a resposta final?',
+        question: 'Isso mesmo! A integral restante é de $1 dx$, que simplesmente vale $x$. Juntando as duas partes: $uv$ menos a integral resolvida, qual é a resposta final?',
         options: [
-          { text: 'x ln(x) - x + C', isCorrect: true, feedback: 'Espetacular! Você dominou a integração por partes do logaritmo natural! A resposta exata é x ln(x) - x + C.' },
-          { text: 'ln(x) - x + C', isCorrect: false, feedback: 'Falta o termo multiplicador "x" do início (u * v), que é ln(x) * x.' }
+          { text: '$x \\ln(x) - x + C$', isCorrect: true, feedback: 'Espetacular! Você dominou a integração por partes do logaritmo natural! A resposta exata é $x \\ln(x) - x + C$.' },
+          { text: '$\\ln(x) - x + C$', isCorrect: false, feedback: 'Falta o termo multiplicador "$x$" do início ($u \\cdot v$), que é $x \\ln(x)$.' }
         ],
-        tip: 'Escreva u * v menos a integral de 1 (que é x), e adicione a constante.'
+        tip: 'Escreva $u \\cdot v$ menos a integral de 1 (que é $x$), e adicione a constante.'
       }
     ]
   }
@@ -548,15 +548,20 @@ Regras importantes:
 - Para e^x use Math.exp(x), para ln(x) use Math.log(x)
 - defaultLimits deve ser um intervalo interessante para visualizar a integral
 - sliderLimits deve cobrir o domínio relevante da função
+- Toda e qualquer expressão matemática, variável ou trecho de fórmula no texto de 'question', 'options[text]', 'options[feedback]' e 'tip' DEVE estar entre símbolos de dólar $ (ex: "A integral de $\\int x dx$ é $x^2/2$").
 - Responda APENAS o JSON, sem nenhum texto antes ou depois`;
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) throw new Error('API key do Gemini não configurada.');
+
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      messages: [{ role: 'user', content: prompt }]
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: {
+        responseMimeType: "application/json"
+      }
     })
   });
 
@@ -565,10 +570,7 @@ Regras importantes:
   }
 
   const data = await response.json();
-  const text = data.content
-    .filter(b => b.type === 'text')
-    .map(b => b.text)
-    .join('');
+  const text = data.candidates[0].content.parts[0].text;
 
   // Remove possíveis marcadores de código markdown antes de parsear
   const clean = text.replace(/```json\s*/gi, '').replace(/```\s*/gi, '').trim();
@@ -578,7 +580,7 @@ Regras importantes:
   // eslint-disable-next-line no-new-func
   const evaluateFn = new Function('x', `
     try {
-      return (${parsed.evaluateCode});
+      ${parsed.evaluateCode.includes('return') ? parsed.evaluateCode : `return (${parsed.evaluateCode});`}
     } catch(e) {
       return 0;
     }

@@ -1,4 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
+import katex from 'katex';
+
+function renderMixedText(text) {
+  if (!text) return null;
+  const parts = text.split(/\$(.*?)\$/g);
+  return parts.map((part, index) => {
+    if (index % 2 === 1) {
+      try {
+        const html = katex.renderToString(part, { displayMode: false, throwOnError: false });
+        return <span key={index} dangerouslySetInnerHTML={{ __html: html }} />;
+      } catch (e) {
+        return <span key={index}>${part}$</span>;
+      }
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
 
 export default function TutorChat({ problemData, onReset }) {
   const [messages, setMessages] = useState([]);
@@ -113,7 +130,7 @@ export default function TutorChat({ problemData, onReset }) {
                 {
                   id: `tutor-finish-${Date.now()}`,
                   sender: 'tutor',
-                  text: '🎉 Parabéns! Você completou toda a jornada do Modo Tutor para este problema! Agora você domina os conceitos envolvidos nesta integral. Gostaria de resolver outro problema?'
+                  text: `🎉 Parabéns! Você completou toda a jornada do Modo Tutor para este problema! O resultado final da integral é: $${problemData.latexResult}$. Agora você domina os conceitos envolvidos! Gostaria de resolver outro problema?`
                 }
               ]);
             }, 1000);
@@ -167,7 +184,7 @@ export default function TutorChat({ problemData, onReset }) {
         {messages.map((msg) => (
           <div key={msg.id} className={`message-row ${msg.sender}`}>
             <div className="msg-bubble">
-              {msg.text}
+              {renderMixedText(msg.text)}
             </div>
           </div>
         ))}
@@ -206,7 +223,7 @@ export default function TutorChat({ problemData, onReset }) {
                   <span style={{ fontWeight: '700', color: 'var(--primary)' }}>
                     {String.fromCharCode(65 + idx)})
                   </span>{' '}
-                  {option.text}
+                  {renderMixedText(option.text)}
                 </button>
               );
             })}

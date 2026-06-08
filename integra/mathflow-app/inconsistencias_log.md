@@ -146,3 +146,34 @@ Este arquivo documenta as inconsistências e bugs detectados no código-fonte do
 - **Data/Hora**: 06/05/2026 13:22:32
 - **Descrição**: Ampliada a geração randômica para processar 4000 integrais em lote (975 para cada uma das 4 categorias + 100 manuais de extremo). O motor math.js e o parser NLP processaram a carga toda mantendo 100% de estabilidade (4000 sucessos, 0 falhas).
 - **Status**: Válido. Limite de parsing provado como perfeito.
+
+---
+
+## 18. Migração de API de IA e Erro 404 (Anthropic para Gemini)
+- **Arquivo afetado:** [mathSolver.js](file:///d:/MEGA/Apps%20-%20LC/integra-adriel/integra/mathflow-app/src/mathSolver.js) e `.env`
+- **Descrição do Problema:** Ao tentar resolver qualquer integral genérica (como frações parciais), o aplicativo travava em um loop de carregamento e não retornava resposta. A inspeção de rede (ou logs) indicava que a API utilizada anteriormente (Anthropic Claude) estava inacessível ou o modelo especificado estava obsoleto/removido.
+- **Resolução:** O motor de inteligência artificial (`solveWithAI`) foi completamente migrado para utilizar a API do Google Gemini (`gemini-flash-latest`), garantindo acesso rápido e respostas altamente precisas. Uma nova chave de API foi inserida de forma segura utilizando arquivo `.env` com `VITE_GEMINI_API_KEY`.
+
+---
+
+## 19. Erro de Compreensão Matemática por Código Invalido no Retorno da IA (SyntaxError em new Function)
+- **Arquivo afetado:** [mathSolver.js](file:///d:/MEGA/Apps%20-%20LC/integra-adriel/integra/mathflow-app/src/mathSolver.js)
+- **Descrição do Problema:** Ao resolver integrais que possuem descontinuidades ou restrições de domínio (ex: frações parciais cujo resultado possui `ln(x-1)`), a IA estava retornando blocos de código com condicionais inteiros `if/else` e instruções `return` explícitas dentro do campo `evaluateCode`. A função auxiliar que transformava essa string em código executável (`new Function('x', 'return ' + evaluateCode)`) quebrava com um `SyntaxError`, exibindo o erro na interface: *"Erro de Compreensão Matemática. Não consegui compreender a expressão matemática informada"*.
+- **Resolução:** Implementada uma análise de expressão regular inteligente em `solveWithAI` que detecta a presença de palavras-chave `if` ou `return` na string gerada pela IA. Caso a IA já tenha fornecido a estrutura completa da função, a criação dinâmica utiliza `new Function('x', evaluateCode)` (sem forçar o prefixo `return`), o que permite a correta execução de blocos condicionais de domínio na avaliação do gráfico interativo.
+
+---
+
+## 20. Omissão da Renderização Padrão KaTeX no Modo Tutor (Texto Misto)
+- **Arquivos afetados:** [TutorChat.jsx](file:///d:/MEGA/Apps%20-%20LC/integra-adriel/integra/mathflow-app/src/TutorChat.jsx) e [mathSolver.js](file:///d:/MEGA/Apps%20-%20LC/integra-adriel/integra/mathflow-app/src/mathSolver.js)
+- **Descrição do Problema:** Apesar da adoção global da biblioteca `katex` para os resultados, o "Modo Tutor" ainda exibia fórmulas matemáticas como texto não formatado diretamente no meio das frases em linguagem natural (ex: `A integral de \int u^n du ...`). Isso quebrava o padrão estético visual e não fornecia a renderização rica exigida pelo padrão KaTeX.
+- **Resolução:**
+  - Foi criado o componente auxiliar `renderMixedText` no `TutorChat.jsx`, capaz de quebrar dinamicamente strings nos caracteres `$` e processar os trechos matemáticos de modo inline no meio da conversação e das opções de resposta.
+  - O prompt de IA no `mathSolver.js` foi alterado instruindo o modelo a envolver todas as fórmulas do chat em `$` (ex: `A integral de $\int x dx$`).
+  - Todas as integrais pré-programadas em `mathSolver.js` tiveram suas explicações de tutor adaptadas para esta formatação mista, resultando em conversas ricas em tipografia científica. Adicionalmente, foi incluída a exibição do resultado matemático completo da integral via LaTeX no balão de congratulação de fim de sessão do tutor.
+
+---
+
+## 21. Gráfico Oculto Indevidamente Durante o Modo Tutor
+- **Arquivo afetado:** [App.jsx](file:///d:/MEGA/Apps%20-%20LC/integra-adriel/integra/mathflow-app/src/App.jsx)
+- **Descrição do Problema:** Durante a execução do Modo Tutor, a mensagem de carregamento do sistema e a primeira fala do chat pediam ao usuário que manipulasse os sliders do "gráfico interativo" para entender a área integrada. No entanto, por uma restrição lógica, o container do gráfico era ocultado sempre que a aplicação saía do modo de "Resolver" para o modo "Tutor", não exibindo gráfico algum.
+- **Resolução:** A lógica de exibição condicional do componente principal `results-container` foi unificada em `App.jsx`. O componente do gráfico agora é avaliado e posicionado em ambos os modos, mantendo-se visível simultaneamente ao lado das interações do chat durante o Modo Tutor, melhorando substancialmente a experiência educacional.
