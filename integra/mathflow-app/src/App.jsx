@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Sparkles, 
-  Calculator, 
-  History, 
-  Search, 
-  Camera, 
-  Send, 
-  FileText, 
-  BarChart3, 
-  ChevronRight, 
-  Clock, 
-  AlertCircle 
+import {
+  Sparkles,
+  Calculator,
+  History,
+  Search,
+  Camera,
+  Send,
+  FileText,
+  BarChart3,
+  ChevronRight,
+  Clock,
+  AlertCircle
 } from 'lucide-react';
 import {
   AreaChart,
@@ -36,13 +36,13 @@ export default function App() {
   const [inputText, setInputText] = useState('');
   const [activeStepIndex, setActiveStepIndex] = useState(0);
 
-  
+
   // Estados de Cálculo e Resultados
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState('Analisando expressão...');
   const [solvedData, setSolvedData] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   // Limites do Gráfico Dinâmico
   const [limits, setLimits] = useState({ a: 0, b: 2 });
   const [definedArea, setDefinedArea] = useState(0);
@@ -72,10 +72,10 @@ export default function App() {
 
       const limitsLimits = solvedData.sliderLimits || { min: -5, max: 5 };
       const points = generateChartPoints(
-        solvedData.evaluate, 
-        limits.a, 
-        limits.b, 
-        limitsLimits.min, 
+        solvedData.evaluate,
+        limits.a,
+        limits.b,
+        limitsLimits.min,
         limitsLimits.max
       );
       setChartPoints(points);
@@ -93,7 +93,7 @@ export default function App() {
 
     // Mensagens de loading progressivas
     setLoadingMsg('Analisando a expressão matemática...');
-    
+
     const msgTimer1 = setTimeout(() => {
       setLoadingMsg('Aplicando as regras analíticas de cálculo...');
     }, 800);
@@ -189,14 +189,14 @@ export default function App() {
           <span className="logo-text">INTEGRA+</span>
         </div>
         <div className="nav-tabs">
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'resolver' ? 'active' : ''}`}
             onClick={() => setActiveTab('resolver')}
           >
             <Calculator size={16} />
             Resolver
           </button>
-          <button 
+          <button
             className={`nav-tab ${activeTab === 'historico' ? 'active' : ''}`}
             onClick={() => setActiveTab('historico')}
           >
@@ -208,7 +208,7 @@ export default function App() {
 
       {/* Container Principal */}
       <main className="app-container">
-        
+
         {activeTab === 'resolver' ? (
           <>
             {/* Tag Inteligente */}
@@ -239,14 +239,14 @@ export default function App() {
             {/* Seletor de Modo (oculta se estiver em loading ou com resultado ativo) */}
             {!solvedData && !isLoading && (
               <div className="mode-selector">
-                <button 
+                <button
                   className={`mode-btn ${mode === 'resolver' ? 'active' : ''}`}
                   onClick={() => setMode('resolver')}
                 >
                   <Sparkles size={14} />
                   Resolver
                 </button>
-                <button 
+                <button
                   className={`mode-btn ${mode === 'tutor' ? 'active' : ''}`}
                   onClick={() => setMode('tutor')}
                 >
@@ -265,7 +265,7 @@ export default function App() {
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder={
-                      mode === 'resolver' 
+                      mode === 'resolver'
                         ? "Digite seu problema... ex: integral de x² + 3x dx"
                         : "Digite seu problema para o tutor... ex: integral de sen(x) cos(x) dx"
                     }
@@ -277,14 +277,14 @@ export default function App() {
                     }}
                   />
                   <div className="input-actions">
-                    <button 
+                    {/* <button
                       className="action-left-btn"
                       onClick={() => alert('Recurso estético de foto: a simulação de upload por imagem foi iniciada. Digite os termos do problema na caixa de texto para que a engine local resolva para você!')}
                     >
                       <Camera size={16} />
                       Foto
-                    </button>
-                    <button 
+                    </button> */}
+                    <button
                       className="resolver-btn"
                       disabled={!inputText.trim()}
                       onClick={() => handleSolve()}
@@ -302,33 +302,33 @@ export default function App() {
                     <span>Experimente um exemplo:</span>
                   </div>
                   <div className="examples-grid">
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de x² + 3x dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int (x^2 + 3x) \\, dx', { throwOnError: false }) }}
                     />
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de sen(x) cos(x) dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\operatorname{sen}(x) \\cos(x) \\, dx', { throwOnError: false }) }}
                     />
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de 1/(x²+1) dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\frac{1}{x^2+1} \\, dx', { throwOnError: false }) }}
                     />
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de raiz de x dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\sqrt{x} \\, dx', { throwOnError: false }) }}
                     />
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de e^(2x) dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int e^{2x} \\, dx', { throwOnError: false }) }}
                     />
-                    <button 
-                      className="example-pill" 
+                    <button
+                      className="example-pill"
                       onClick={() => handleExampleClick('integral de ln(x) dx')}
                       dangerouslySetInnerHTML={{ __html: katex.renderToString('\\int \\ln(x) \\, dx', { throwOnError: false }) }}
                     />
@@ -345,8 +345,8 @@ export default function App() {
                   <span style={{ fontWeight: '600' }}>Erro de Compreensão Matemática</span>
                 </div>
                 <p style={{ marginTop: '10px', fontSize: '14.5px', color: 'var(--text-secondary)' }}>{errorMessage}</p>
-                <button 
-                  className="empty-btn" 
+                <button
+                  className="empty-btn"
                   onClick={() => setErrorMessage('')}
                   style={{ marginTop: '15px' }}
                 >
@@ -374,37 +374,37 @@ export default function App() {
                 {mode === 'resolver' && (
                   <div className="result-card">
                     <div className="card-title-bar">
-                    <div className="card-title-text">
-                      <FileText size={18} className="card-title-icon" />
-                      Resultado Analítico
-                    </div>
-                    <button 
-                      className="tutor-header-btn" 
-                      onClick={() => { setSolvedData(null); setInputText(''); }}
-                    >
-                      Resolver nova integral
-                    </button>
-                  </div>
-                  <div className="math-result-display">
-                    <div className="math-formula">
-                      <div 
-                        style={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500', width: '100%', overflowX: 'auto', textAlign: 'center' }}
-                        dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexFormula, { displayMode: true, throwOnError: false }) }}
-                      />
-                      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px', textAlign: 'center' }}>
-                        Resultado:
+                      <div className="card-title-text">
+                        <FileText size={18} className="card-title-icon" />
+                        Resultado Analítico
                       </div>
-                      <div 
-                        className="formula-highlight" 
-                        style={{ fontSize: '16px', fontWeight: '600', width: '100%', overflowX: 'auto', textAlign: 'center' }}
-                        dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexResult, { displayMode: true, throwOnError: false }) }}
-                      />
+                      <button
+                        className="tutor-header-btn"
+                        onClick={() => { setSolvedData(null); setInputText(''); }}
+                      >
+                        Resolver nova integral
+                      </button>
                     </div>
+                    <div className="math-result-display">
+                      <div className="math-formula">
+                        <div
+                          style={{ marginBottom: '12px', fontSize: '15px', fontWeight: '500', width: '100%', overflowX: 'auto', textAlign: 'center' }}
+                          dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexFormula, { displayMode: true, throwOnError: false }) }}
+                        />
+                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '12px', textAlign: 'center' }}>
+                          Resultado:
+                        </div>
+                        <div
+                          className="formula-highlight"
+                          style={{ fontSize: '16px', fontWeight: '600', width: '100%', overflowX: 'auto', textAlign: 'center' }}
+                          dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.latexResult, { displayMode: true, throwOnError: false }) }}
+                        />
+                      </div>
+                    </div>
+                    <p style={{ fontSize: '14px', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                      Esta é a antiderivada geral da função. O termo <strong>C</strong> representa a constante arbitrária de integração.
+                    </p>
                   </div>
-                  <p style={{ fontSize: '14px', color: 'var(--text-secondary)', textAlign: 'center' }}>
-                    Esta é a antiderivada geral da função. O termo <strong>C</strong> representa a constante arbitrária de integração.
-                  </p>
-                </div>
                 )}
 
                 {/* 2. Gráfico Interativo com Sliders */}
@@ -418,7 +418,7 @@ export default function App() {
                   <p style={{ fontSize: '14.5px', color: 'var(--text-secondary)', marginBottom: '15px' }}>
                     A integral representa a <strong>área líquida sob a curva</strong>. Mova os controles abaixo para alterar o intervalo de integração <strong>[a, b]</strong> e veja a área atualizar em tempo real:
                   </p>
-                  
+
                   {/* Gráfico Recharts */}
                   <div className="chart-container">
                     <ResponsiveContainer width="100%" height="100%">
@@ -428,35 +428,35 @@ export default function App() {
                       >
                         <defs>
                           <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.4}/>
-                            <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.0}/>
+                            <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.4} />
+                            <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.0} />
                           </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
                         <XAxis dataKey="x" stroke="var(--text-muted)" fontSize={12} tickLine={false} />
                         <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} />
-                        <Tooltip 
-                          contentStyle={{ 
-                            background: 'var(--card-bg)', 
+                        <Tooltip
+                          contentStyle={{
+                            background: 'var(--card-bg)',
                             borderColor: 'var(--card-border)',
                             color: 'var(--text-primary)',
                             borderRadius: '8px'
-                          }} 
+                          }}
                         />
                         {/* Preenche a área integrada */}
-                        <Area 
-                          type="monotone" 
-                          dataKey="yArea" 
+                        <Area
+                          type="monotone"
+                          dataKey="yArea"
                           stroke="none"
-                          fill="url(#areaGradient)" 
+                          fill="url(#areaGradient)"
                         />
                         {/* Linha principal da função */}
-                        <Area 
-                          type="monotone" 
-                          dataKey="y" 
-                          stroke="var(--primary)" 
+                        <Area
+                          type="monotone"
+                          dataKey="y"
+                          stroke="var(--primary)"
                           strokeWidth={2.5}
-                          fill="none" 
+                          fill="none"
                         />
                         {/* Linhas verticais nos limites de integração */}
                         <ReferenceLine x={limits.a} stroke="var(--primary)" strokeWidth={1.5} strokeDasharray="4 4" />
@@ -511,7 +511,7 @@ export default function App() {
                         Explicações Passo a Passo
                       </div>
                     </div>
-                    
+
                     <div className="steps-visualizer-grid">
                       {/* Coluna Esquerda: Linha do Tempo */}
                       <div className="visualizer-sidebar">
@@ -523,10 +523,10 @@ export default function App() {
                             if (isActive) timelineClass += ' active';
                             if (!isActive && !isPast) timelineClass += ' inactive';
                             if (isPast) timelineClass += ' completed';
-                            
+
                             return (
-                              <div 
-                                key={idx} 
+                              <div
+                                key={idx}
                                 className={timelineClass}
                                 onClick={() => setActiveStepIndex(idx)}
                                 style={{ cursor: 'pointer' }}
@@ -540,7 +540,7 @@ export default function App() {
                           })}
                         </div>
                       </div>
-                      
+
                       {/* Coluna Direita: Foco Visual e Controles */}
                       <div className="visualizer-main">
                         <div className="visualizer-focus-board">
@@ -548,50 +548,50 @@ export default function App() {
                             <>
                               <h3 className="focus-title">{solvedData.steps[activeStepIndex].title}</h3>
                               <p className="focus-desc">{renderMixedText(solvedData.steps[activeStepIndex].desc)}</p>
-                              <div 
+                              <div
                                 className="focus-math"
                                 dangerouslySetInnerHTML={{ __html: katex.renderToString(solvedData.steps[activeStepIndex].math, { displayMode: true, throwOnError: false }) }}
                               />
                             </>
                           )}
                         </div>
-                        
+
                         {/* Controles de Reprodução */}
                         <div className="playback-controls">
-                          <button 
-                            className="playback-btn" 
+                          <button
+                            className="playback-btn"
                             disabled={activeStepIndex === 0}
                             onClick={() => setActiveStepIndex(0)}
                             title="Primeiro Passo"
                           >
                             |&lt;
                           </button>
-                          <button 
-                            className="playback-btn" 
+                          <button
+                            className="playback-btn"
                             disabled={activeStepIndex === 0}
                             onClick={() => setActiveStepIndex(Math.max(0, activeStepIndex - 1))}
                             title="Passo Anterior"
                           >
                             &lt;
                           </button>
-                          <input 
-                            type="range" 
+                          <input
+                            type="range"
                             className="playback-slider"
-                            min={0} 
-                            max={solvedData.steps.length - 1} 
+                            min={0}
+                            max={solvedData.steps.length - 1}
                             value={activeStepIndex}
                             onChange={(e) => setActiveStepIndex(parseInt(e.target.value))}
                           />
-                          <button 
-                            className="playback-btn" 
+                          <button
+                            className="playback-btn"
                             disabled={activeStepIndex === solvedData.steps.length - 1}
                             onClick={() => setActiveStepIndex(Math.min(solvedData.steps.length - 1, activeStepIndex + 1))}
                             title="Próximo Passo"
                           >
                             &gt;
                           </button>
-                          <button 
-                            className="playback-btn" 
+                          <button
+                            className="playback-btn"
                             disabled={activeStepIndex === solvedData.steps.length - 1}
                             onClick={() => setActiveStepIndex(solvedData.steps.length - 1)}
                             title="Último Passo"
@@ -610,7 +610,7 @@ export default function App() {
                 {/* Exibição do Tutor IA (Modo Chat) */}
                 {mode === 'tutor' && (
                   <div style={{ width: '100%' }}>
-                    <TutorChat 
+                    <TutorChat
                       problemData={solvedData}
                       onReset={() => { setSolvedData(null); setInputText(''); }}
                     />
@@ -668,8 +668,8 @@ export default function App() {
               <>
                 <div className="history-list">
                   {filteredHistory.map((item) => (
-                    <div 
-                      key={item.id} 
+                    <div
+                      key={item.id}
                       className="history-item"
                       onClick={() => handleHistoryItemClick(item)}
                     >
@@ -684,7 +684,7 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <button 
+                <button
                   className="empty-btn"
                   onClick={handleClearHistory}
                   style={{ alignSelf: 'center', marginTop: '20px', borderColor: '#ef4444', color: '#ef4444', background: 'transparent' }}
